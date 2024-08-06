@@ -9,7 +9,7 @@ def get_volume_id_from_arn(volume_arn):
 def jv_function(volume_arn):
     a = 10
     b = 20
-    return a-b
+    return a*b
 
 def lambda_handler(event, context):
     print(json.dumps(event))  # Log the entire event for debugging purposes
