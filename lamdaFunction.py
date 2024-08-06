@@ -5,6 +5,11 @@ def get_volume_id_from_arn(volume_arn):
     arn_parts = volume_arn.split(':')
     volume_id = arn_parts[-1].split('/')[-1]
     return volume_id
+    
+def jv_function(volume_arn):
+    a = 10
+    b = 20
+    return a+b
 
 def lambda_handler(event, context):
     print(json.dumps(event))  # Log the entire event for debugging purposes
@@ -14,15 +19,15 @@ def lambda_handler(event, context):
     volume_id = get_volume_id_from_arn(volume_arn)
     
     # Create EC2 client
-    ec2_client = boto3.client('ec2')
+    ec2_client2 = boto3.client('ec2')
     
     try:
         # Describe the volume to check its current type
-        volume_info = ec2_client.describe_volumes(VolumeIds=[volume_id])
+        volume_info2 = ec2_client.describe_volumes(VolumeIds=[volume_id])
         current_volume_type = volume_info['Volumes'][0]['VolumeType']
         
         # If the volume is already 'gp3', do not proceed with modification
-        if current_volume_type == 'gp3':
+        if current2_volume_type == 'gp3':
             print(f"Volume {volume_id} is already of type 'gp3'. No modification needed.")
             return {
                 'statusCode': 200,
